@@ -39,7 +39,7 @@ export default async function handler(
     const { data: answers, error: answersError } = await supabase
       .from('answers')
       .select('id, question_id, text, is_correct')
-      .in('question_id', questions.map((question: any) => question.id));
+      .in('question_id', questions.map((question) => question.id));
 
     if (answersError) {
       return res.status(400).json({ error: answersError.message });
@@ -48,12 +48,12 @@ export default async function handler(
     const quizDetails = {
       id: quiz.id,
       title: quiz.title,
-      questions: questions.map((question: any) => ({
+      questions: questions.map((question) => ({
         questionText: question.text,
         id: question.id,
         answers: answers
-          .filter((answer: any) => answer.question_id === question.id)
-          .map((answer: any) => ({
+          .filter((answer) => answer.question_id === question.id)
+          .map((answer) => ({
             text: answer.text,
             isCorrect: answer.is_correct,
             id: answer.id

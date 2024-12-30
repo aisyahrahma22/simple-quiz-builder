@@ -57,7 +57,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       // Now handle the answers for this question
-      const answers = question.answers.map((answer, index) => ({
+      const answers = question.answers.map((answer) => ({
         question_id: question.id, // Use the correct question_id
         text: answer.text,
         is_correct: answer.isCorrect,

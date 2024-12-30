@@ -7,13 +7,6 @@ const supabase = createClient(
   process.env.SUPABASE_ANON_KEY!
 );
 
-// Define types for the answer and question structure
-type Answer = {
-  id: string;
-  text: string;
-  is_correct: boolean;
-};
-
 // API handler for DELETE request
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Check if the HTTP method is DELETE

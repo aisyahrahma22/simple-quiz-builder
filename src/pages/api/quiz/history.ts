@@ -31,7 +31,7 @@ export default async function handler(
      return res.status(404).json({ message: 'No submissions found for this user' });
    }
 
-   const quizIds = submissions.map((submission: any) => submission.quiz_id);
+   const quizIds = submissions.map((submission) => submission.quiz_id);
 
    // Fetch the quizzes by IDs
    const { data: quizzes, error: quizError } = await supabase

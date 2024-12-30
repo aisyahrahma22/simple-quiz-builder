@@ -6,12 +6,6 @@ const supabase = createClient(
   process.env.SUPABASE_ANON_KEY!
 );
 
-type Answer = {
-  id: string;
-  text: string;
-  is_correct: boolean;
-};
-
 
 export default async function handler(
   req: NextApiRequest,

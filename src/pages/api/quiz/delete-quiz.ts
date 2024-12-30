@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     if (questionData?.length > 0) {
-      const questionIds = questionData.map((question: any) => question.id);
+      const questionIds = questionData.map((question) => question.id);
       const { error: answerError } = await supabase
         .from('answers')
         .delete()
@@ -51,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     return res.status(200).json({ message: 'Quiz and associated data deleted successfully' });
-  } catch (error: any) {
-    return res.status(500).json({ error: error.message });
+  } catch (error) {
+    return res.status(500).json({ error: error || 'something wrong'});
   }
 }
