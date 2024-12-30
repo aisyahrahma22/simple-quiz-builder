@@ -102,7 +102,7 @@ const QuizDetail = () => {
       });
   
       if (response.ok) {
-        const data = await response.json();
+        await response.json();
         Swal.fire({
           icon: 'success',
           title: 'Submission saved successfully!',

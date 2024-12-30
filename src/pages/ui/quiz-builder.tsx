@@ -82,9 +82,6 @@ const QuizBuilder = () => {
     setQuestions(newQuestions);
   };
 
-  const handleViewAllQuestions = () => {
-    router.push(`/list`)
-  };
 
   return (
    <>

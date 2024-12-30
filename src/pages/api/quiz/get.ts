@@ -12,18 +12,6 @@ type Answer = {
   is_correct: boolean;
 };
 
-type Question = {
-  id: string;
-  text: string;
-  Answers: Answer[];
-};
-
-type Quiz = {
-  id: string;
-  title: string;
-  user_id: string;
-  score: number
-};
 
 export default async function handler(
   req: NextApiRequest,

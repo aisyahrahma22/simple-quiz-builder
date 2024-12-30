@@ -12,7 +12,7 @@ export default async function handler(
 ) {
   if (req.method === 'GET') {
     const { userId } = req.query;
-console.log('userId', userId)
+
     if (!userId) {
       return res.status(400).json({ error: 'Invalid user ID' });
     }

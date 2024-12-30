@@ -11,13 +11,12 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
-    const { id } = req.query; // Get the quiz ID from the query parameters
+    const { id } = req.query; 
 
     if (!id) {
       return res.status(400).json({ error: 'Quiz ID is required' });
     }
 
-    // Fetch the quiz data by ID
     const { data: quiz, error: quizError } = await supabase
       .from('quizzes')
       .select('*')
@@ -28,7 +27,6 @@ export default async function handler(
       return res.status(400).json({ error: quizError.message });
     }
 
-    // Fetch the questions related to this quiz
     const { data: questions, error: questionsError } = await supabase
       .from('questions')
       .select('id, text, quiz_id')
@@ -38,7 +36,6 @@ export default async function handler(
       return res.status(400).json({ error: questionsError.message });
     }
 
-    // Fetch answers related to the questions of the quiz
     const { data: answers, error: answersError } = await supabase
       .from('answers')
       .select('id, question_id, text, is_correct')
@@ -48,7 +45,6 @@ export default async function handler(
       return res.status(400).json({ error: answersError.message });
     }
 
-    // Structure the data as needed
     const quizDetails = {
       id: quiz.id,
       title: quiz.title,

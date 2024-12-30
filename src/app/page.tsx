@@ -23,24 +23,20 @@ export default function Home() {
     const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
     setIsLoading(true);
 
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
 
-      const data = await response.json();
-      if(data.token) localStorage.setItem('userToken', data.token);
-      if (!response.ok) {
-        setErrorMessage(data.error || 'An error occurred');
-      } else {
-        router.push('/ui/quiz-builder');
-      }
-    } catch (error) {
-      setErrorMessage('Something went wrong, please try again.');
-    } finally {
+    const data = await response.json();
+    if(data.token) localStorage.setItem('userToken', data.token);
+    if (!response.ok) {
+      setErrorMessage(data.error || 'An error occurred');
+    } else {
       setIsLoading(false);
+      setErrorMessage('Something went wrong, please try again.');
+      router.push('/ui/quiz-builder');
     }
   };
 

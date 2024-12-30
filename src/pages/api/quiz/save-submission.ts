@@ -20,7 +20,7 @@ export default async function handler(
   if (req.method === 'POST') {
     const { user_id, quiz_id, score }: QuizData = req.body;
 
-    const { data: quiz, error: quizError } = await supabase
+    const { error: quizError } = await supabase
       .from('submissions')
       .insert([{ user_id, quiz_id, score: Number(score) }])
       .select();

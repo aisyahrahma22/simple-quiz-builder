@@ -112,24 +112,6 @@ const EditQuizBuilder = () => {
     }
   };
 
-  // Handle adding a question
-  const handleAddQuestion = () => {
-    setQuestions([
-      ...questions,
-      {
-        questionText: '',
-        id: '',
-        answers: [
-          { id: '', text: '', isCorrect: false },
-          { id: '', text: '', isCorrect: false },
-          { id: '', text: '', isCorrect: false },
-          { id: '', text: '', isCorrect: false },
-          { id: '', text: '', isCorrect: false },
-        ],
-      },
-    ]);
-  };
-
   const deleteQuestionFromDatabase = async (questionId: string) => {
     const response = await fetch(`/api/quiz/delete?id=${questionId}`, {
       method: 'DELETE',

@@ -39,12 +39,12 @@ const QuizList = () => {
     } else {
       const cleanedString = isAuthenticated?.replace("dummy-token-for-", "");
       setUserId(cleanedString);
-      fetchQuizzes(cleanedString);
+      fetchQuizzes();
     }
   }, [router]);
 
   // Fetch quizzes from the backend
-  const fetchQuizzes = async (userId: string) => {
+  const fetchQuizzes = async () => {
     setLoading(true); // Start loading
     const response = await fetch(`/api/quiz/list?user_id=${userId}`);
     const data = await response.json();
@@ -93,10 +93,6 @@ const QuizList = () => {
     });
   };
 
-  // Handle creating a new question (redirects to quiz-builder)
-  const handleCreateQuestion = () => {
-    router.push('/ui/quiz-builder'); // Redirect to quiz-builder page
-  };
 
   // Handle editing a quiz (redirects to quiz-builder with the quiz data)
   const handleEditQuiz = (quizId: string) => {

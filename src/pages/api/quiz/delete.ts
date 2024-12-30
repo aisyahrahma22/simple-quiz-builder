@@ -14,12 +14,6 @@ type Answer = {
   is_correct: boolean;
 };
 
-type Question = {
-  id: string;
-  text: string;
-  answers: Answer[];
-};
-
 // API handler for DELETE request
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Check if the HTTP method is DELETE
@@ -33,7 +27,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Delete associated answers first
-    const { data: answerData, error: answerError } = await supabase
+    const { error: answerError } = await supabase
       .from('answers')  // Ensure the correct table name for answers
       .delete()
       .eq('question_id', id);
@@ -43,7 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // Now delete the question itself
-    const { data: questionData, error: questionError } = await supabase
+    const { error: questionError } = await supabase
       .from('questions')  // Ensure the correct table name for questions
       .delete()
       .eq('id', id);

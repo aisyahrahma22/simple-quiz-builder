@@ -1,13 +1,11 @@
 import { createClient } from '@supabase/supabase-js';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-// Initialize Supabase client
 const supabase = createClient(
   process.env.SUPABASE_URL!,
   process.env.SUPABASE_ANON_KEY!
 );
 
-// API handler for DELETE request
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'DELETE') {
     return res.status(405).json({ message: 'Only DELETE requests are allowed' });
@@ -15,13 +13,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   const { id } = req.query;
 
-  // Validate `id` query parameter
   if (!id || typeof id !== 'string') {
     return res.status(400).json({ error: 'Missing or invalid questionId' });
   }
 
   try {
-    // Delete questions linked to the quiz
     const { data: questionData, error: questionError } = await supabase
       .from('questions')
       .delete()
@@ -32,7 +28,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       throw new Error(questionError.message);
     }
 
-    // If questions exist, delete associated answers
     if (questionData?.length > 0) {
       const questionIds = questionData.map((question: any) => question.id);
       const { error: answerError } = await supabase

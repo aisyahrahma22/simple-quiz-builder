@@ -30,10 +30,10 @@ type QuizData = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'PUT') {
-    const { id, user_id, title, questions, score }: QuizData = req.body;
+    const { id, title, questions, score }: QuizData = req.body;
 
     // Update quiz metadata in the 'quizzes' table
-    const { data: quiz, error: quizError } = await supabase
+    const { error: quizError } = await supabase
       .from('quizzes')
       .update({ title, score})
       .eq('id', id)
@@ -46,7 +46,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // Iterate through each question and update in the database
     for (const question of questions) {
       // Update the question in the 'questions' table
-      const { data: questionData, error: questionError } = await supabase
+      const { error: questionError } = await supabase
         .from('questions')
         .update({ text: question.questionText })
         .eq('id', question.id) // Use the specific question ID
