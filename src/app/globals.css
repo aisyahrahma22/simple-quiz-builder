@@ -7,6 +7,20 @@
   --foreground: #171717;
 }
 
+/* globals.css */
+html {
+  direction: ltr; /* Default ke LTR */
+}
+
+html[lang='ar'] {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] {
+  direction: rtl;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
